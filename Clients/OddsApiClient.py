@@ -8,7 +8,9 @@ API_KEY = '157d6795bd369c260d82ddb6064eb13f'
 ODDS_API_URL = 'https://api.the-odds-api.com/v4'
 
 class Regions(Enum):
+    AU = 'au'
     UK = 'uk'
+    US = 'us'
 
 class Markets(Enum):
     H2H = 'h2h'
@@ -75,7 +77,7 @@ def __getAllSports():
 
     return sports_response.json()
 
-def getEventsForMultipleSports(sports: list[str], regions: list[Regions], markets: list[Markets]) -> list[oddsModel.Event]:
+def getEventsForMultipleSports(sports, regions: list[Regions], markets: list[Markets]) -> list[oddsModel.Event]:
     events_in_json = []
     for sport in sports:
         events_in_json.extend(__getEventsForSingleSport(sport, ",".join([region.value for region in list(regions)]), ",".join([market.value for market in list(markets)])))

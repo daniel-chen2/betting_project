@@ -5,8 +5,8 @@ from dataclasses import dataclass
 
 class H2hOutcome(Enum):
         H = 'home_team'
-        D = 'away_team'
-        A = 'draw'
+        A = 'away_team'
+        D = 'draw'
 
 @dataclass
 class H2hBet:
@@ -20,6 +20,7 @@ class H2hBet:
     guessed_outcome: H2hOutcome
     betAmount: float
     outcome: Optional[H2hOutcome]
+    extra_notes: Optional[str]
 
 @dataclass
 class H2hBookmaker:

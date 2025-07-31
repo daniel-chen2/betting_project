@@ -19,11 +19,13 @@ def oddsApiEventToH2hEvent(oddsApiEvent: Event) -> H2hEvent:
 
         h2hOutcomes = h2hMarket.outcomes
 
+        draw_odds = next(filter(lambda outcome: outcome.name == "Draw", h2hOutcomes), None)
+
         h2hBookmakers.append(H2hBookmaker(
             title=bookmaker.key,
             home_team_back_odds=next(filter(lambda outcome: outcome.name == oddsApiEvent.home_team, h2hOutcomes)).price,
             away_team_back_odds=next(filter(lambda outcome: outcome.name == oddsApiEvent.away_team, h2hOutcomes)).price,
-            draw_back_odds=next(filter(lambda outcome: outcome.name == "Draw", h2hOutcomes)).price
+            draw_back_odds= draw_odds.price if draw_odds is not None else draw_odds
         ))
         
     return H2hEvent(

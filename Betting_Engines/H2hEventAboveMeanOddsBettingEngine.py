@@ -17,10 +17,11 @@ class H2hEventAboveMeanOddsBettingEngine:
         worthyBets = []
         for index, bookmaker in bookmakers_df.iterrows():
             for outcome in ["home_team", "away_team", "draw"]:
+                if(bookmaker[f"{outcome}_back_odds"] is None):
+                    break
                 probabilityMedian = 1/bookmakers_df[f"{outcome}_back_odds"].median(numeric_only=True)
                 if(self.__willBet(bookmaker[f"{outcome}_back_odds"], probabilityMedian, self.alpha, self.commision, self.betOddsUpperLimit)):
                     worthyBets.append({"bookmaker": bookmaker["title"], "guessed_outcome": H2hOutcome(outcome), "odds": bookmaker[f"{outcome}_back_odds"], "median": 1/probabilityMedian})
-                    print(worthyBets)
         return worthyBets
 
     def analyseAndFindBets(self, h2hEvents: list[H2hEvent]) -> list[H2hBet]: 
@@ -49,7 +50,8 @@ class H2hEventAboveMeanOddsBettingEngine:
                         betAmount=self.betAmount,
                         guessed_outcome=betFound["guessed_outcome"],
                         odds=betFound["odds"],
-                        outcome=event.outcome
+                        outcome=event.outcome,
+                        extra_notes=f"median = {betFound["median"]}"
                     )
                 )
             return betsFound
