@@ -21,7 +21,7 @@ current_formatted_time = current_utc_time.isoformat(timespec="seconds").replace(
 
 sports = oddsApi.ALL_SOCCER_SPORTS + oddsApi.All_OTHER_SPORTS
 soccer_events = oddsApi.getEventsForMultipleSports(
-    sports=sports[4:10],
+    sports=sports,
     regions=[oddsApi.Regions.UK],
     markets=[oddsApi.Markets.H2H],
     commenceTimeTo=iso_formatted_time_with_z,
@@ -29,7 +29,7 @@ soccer_events = oddsApi.getEventsForMultipleSports(
 )
 
 bettingEngine = BettingEngine.H2hEventAboveMeanOddsBettingEngine(
-    alpha=0,
+    alpha=0.6,
     betOddsUpperLimit=2.5,
     betAmount=10,
     commision=0.0,
