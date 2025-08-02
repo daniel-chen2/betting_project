@@ -2,7 +2,7 @@
 
     on:
         schedule:
-            - cron: '*/30 * * * *' # This triggers the workflow every 5 minutes
+            - cron: '*/60 * * * *' # This triggers the workflow every 5 minutes
         workflow_dispatch:
                 # Optional: Define inputs if the workflow requires user input
                 inputs:
