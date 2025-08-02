@@ -32,7 +32,7 @@ soccer_events = oddsApi.getEventsForMultipleSports(
 )
 
 bettingEngine = BettingEngine.H2hEventAboveMeanOddsBettingEngine(
-    alpha=0.05,
+    alpha=0.04,
     betOddsUpperLimit=2.5,
     betAmount=10,
     commision=0.0,
