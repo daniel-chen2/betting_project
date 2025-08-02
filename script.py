@@ -9,6 +9,9 @@ from datetime import datetime, timedelta, timezone
 import Betting_Engines.H2hEventAboveMeanOddsBettingEngine as BettingEngine
 import sys
 import discord_bot as discord_bot
+import sys
+
+sys.stdout.reconfigure(encoding='utf-8')
 
 current_utc_time = datetime.now(timezone.utc)
 future_time = current_utc_time + timedelta(hours=12)
