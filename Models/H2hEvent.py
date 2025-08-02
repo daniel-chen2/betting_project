@@ -21,6 +21,7 @@ class H2hBet:
     betAmount: float
     bookmaker_average_odds: float
     outcome: Optional[H2hOutcome]
+    alpha: Optional[float]
 
 @dataclass
 class H2hBookmaker:

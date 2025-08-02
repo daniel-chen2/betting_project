@@ -66,7 +66,8 @@ class H2hEventAboveMeanOddsBettingEngine:
                         guessed_outcome=betFound["guessed_outcome"],
                         odds=betFound["odds"],
                         outcome=event.outcome,
-                        bookmaker_average_odds=betFound["median"]
+                        bookmaker_average_odds=betFound["median"],
+                        alpha=1/betFound["median"] - 1/betFound["odds"]
                     )
                 )
         return betsFound

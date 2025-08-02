@@ -32,7 +32,7 @@ soccer_events = oddsApi.getEventsForMultipleSports(
 )
 
 bettingEngine = BettingEngine.H2hEventAboveMeanOddsBettingEngine(
-    alpha=0.6,
+    alpha=0.05,
     betOddsUpperLimit=2.5,
     betAmount=10,
     commision=0.0,
@@ -41,16 +41,11 @@ bettingEngine = BettingEngine.H2hEventAboveMeanOddsBettingEngine(
 
 current_utc_time = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%M-%S")
 
-result_df = pd.DataFrame(
-    bettingEngine.analyseAndFindBets(oddsApiEventsToH2hEvent(soccer_events))
-)
-csv = result_df.to_csv(f"Results/{current_utc_time}_results.csv", index=False)
+result_df = pd.DataFrame(bettingEngine.analyseAndFindBets(oddsApiEventsToH2hEvent(soccer_events)))
+csv_url = f'Results/{current_utc_time}_results.csv'
+result_df.to_csv(csv_url, index=False) 
+
+if(len(result_df) > 0):
+    discord_bot.send_message("Results:", csv_url)
 
 print(result_df)
-
-if len(result_df) > 0:
-    print("Sending message to discord...")
-    for index, result in result_df.iterrows():
-        discord_bot.send_message(
-            f"\n\n bookmaker: {result["bookmaker"]} \n home_team: {result["home_team"]} \n away_team: {result['away_team']} \n commence_time: {result["commence_time"]} \n odds: {result["odds"]} \n bet amount: {result["betAmount"]} \n bookmaker average odds {result["bookmaker_average_odds"]}"
-        )
