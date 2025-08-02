@@ -15,7 +15,7 @@
                 
     jobs:
       build:
-        runs-on: ubuntu-latest # Use a GitHub-hosted Ubuntu runner
+        runs-on: windows-latest # Use a GitHub-hosted Ubuntu runner
 
         steps:
           - name: Checkout repository
