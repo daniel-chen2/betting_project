@@ -1,0 +1,2 @@
+id,bookmaker,home_team,away_team,commence_time,odds,sport_key,guessed_outcome,betAmount,bookmaker_average_odds,outcome
+06fc798b091e4aca3a90c30ded73ea00,betfair_ex_uk,Los Angeles FC,Pachuca,2025-08-02 02:30:00+00:00,2.0,soccer_concacaf_leagues_cup,H2hOutcome.H,10,1.75,

@@ -19,6 +19,14 @@ ODDS_FORMAT = 'decimal' # decimal | american
 
 DATE_FORMAT = 'iso' # iso | unix
 
+All_OTHER_SPORTS = [
+    "tennis_wta_canadian_open",
+    "tennis_atp_canadian_open",
+    "rugbyleague_nrl",
+    "mma_mixed_martial_arts",
+    "icehockey_nhl",
+]
+
 ALL_SOCCER_SPORTS = [
     "soccer_argentina_primera_division",
     "soccer_austria_bundesliga",
@@ -77,10 +85,10 @@ def __getAllSports():
 
     return sports_response.json()
 
-def getEventsForMultipleSports(sports, regions: list[Regions], markets: list[Markets]) -> list[oddsModel.Event]:
+def getEventsForMultipleSports(sports, regions: list[Regions], markets: list[Markets], commenceTimeTo=None, commenceTimeFrom=None) -> list[oddsModel.Event]:
     events_in_json = []
     for sport in sports:
-        events_in_json.extend(__getEventsForSingleSport(sport, ",".join([region.value for region in list(regions)]), ",".join([market.value for market in list(markets)])))
+        events_in_json.extend(__getEventsForSingleSport(sport, ",".join([region.value for region in list(regions)]), ",".join([market.value for market in list(markets)]), commenceTimeTo=commenceTimeTo, commenceTimeFrom=commenceTimeFrom))
 
     deserialised_events = []
     for event in events_in_json:
@@ -88,19 +96,29 @@ def getEventsForMultipleSports(sports, regions: list[Regions], markets: list[Mar
     
     return deserialised_events
 
-def __getEventsForSingleSport(sport, regions, markets):
+
+def __getEventsForSingleSport(sport, regions, markets, commenceTimeTo, commenceTimeFrom):
     odds_json = []
+
+
+    params={
+        "api_key": API_KEY,
+        "regions": regions,
+        "markets": markets,
+        "oddsformat": ODDS_FORMAT,
+        "dateformat": DATE_FORMAT,
+    }
+
+    if(commenceTimeTo is not None):
+        params["commenceTimeTo"] = commenceTimeTo
+
+    if(commenceTimeTo is not None):
+        params["commenceTimeFrom"] = commenceTimeFrom
 
     odds_response = requests.get(
 
         f"https://api.the-odds-api.com/v4/sports/{sport}/odds",
-        params={
-            "api_key": API_KEY,
-            "regions": regions,
-            "markets": markets,
-            "oddsFormat": ODDS_FORMAT,
-            "dateFormat": DATE_FORMAT,
-        },
+        params=params
     )
 
 
@@ -114,6 +132,59 @@ def __getEventsForSingleSport(sport, regions, markets):
     else:
 
         odds_json = odds_response.json()
+
+        print("Number of events:", len(odds_json))
+
+        print(odds_json)
+
+
+        # Check the usage quota
+
+        print("Remaining requests", odds_response.headers["x-requests-remaining"])
+
+        print("Used requests", odds_response.headers["x-requests-used"])
+
+    return odds_json
+
+
+def getHistoricalEventsForMultipleSports(sports, regions: list[Regions], markets: list[Markets], date) -> list[oddsModel.Event]:
+    events_in_json = []
+    for sport in sports:
+        events_in_json.extend(__getHistoricalEventsForSingleSport(sport, ",".join([region.value for region in list(regions)]), ",".join([market.value for market in list(markets)]), date=date))
+
+    deserialised_events = []
+    for event in events_in_json:
+        deserialised_events.append(deserialize.deserialize(oddsModel.Event, event))
+    
+    return deserialised_events
+
+def __getHistoricalEventsForSingleSport(sport, regions, markets, date):
+    odds_json = []
+
+    odds_response = requests.get(
+
+        f"https://api.the-odds-api.com/v4/historical/sports/{sport}/odds",
+        params={
+            "api_key": API_KEY,
+            "regions": regions,
+            "markets": markets,
+            "oddsFormat": ODDS_FORMAT,
+            "dateFormat": DATE_FORMAT,
+            "date": date
+        },
+    )
+
+
+    if odds_response.status_code != 200:
+
+        print(
+            f"Failed to get odds: status_code {odds_response.status_code}, response body {odds_response.text}"
+        )
+
+
+    else:
+
+        odds_json = odds_response.json()["data"]
 
         print("Number of events:", len(odds_json))
 

@@ -19,8 +19,8 @@ class H2hBet:
     sport_key: str
     guessed_outcome: H2hOutcome
     betAmount: float
+    bookmaker_average_odds: float
     outcome: Optional[H2hOutcome]
-    extra_notes: Optional[str]
 
 @dataclass
 class H2hBookmaker:

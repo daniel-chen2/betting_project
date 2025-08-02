@@ -1,0 +1,5 @@
+,Datetime  Placed,id,bookmaker,home_team,away_team,commence_time,odds,sport_key,guessed_outcome,betAmount,bookmaker_average_odds,outcome,is_correct,
+0,2024-07-30T12:00:00Z,c3b6d2893d767fab19a35cd0e1bf3d0c,betfair_ex_uk,Sandvikens IF,Gefle IF,2024-08-03 14:00:00+00:00,1.58,soccer_sweden_superettan,H2hOutcome.H,10,1.44,H,TRUE,
+0,2024-08-30T12:00:00Z,49a635e5739b70e270d7be002d4d5676,betfair_ex_uk,Nottingham Forest,Newcastle United,2024-08-28 19:01:13+00:00,1.16,soccer_england_efl_cup,H2hOutcome.D,10,1.03,D,TRUE,May have been live bet
+,2024-08-30T12:00:00Z,e6c7975347750783849625f6af765302,paddypower,San Lorenzo,Velez Sarsfield BA,2024-09-15 20:00:00+00:00,2.62,soccer_argentina_primera_division,H2hOutcome.H,10,1.87,None,FALSE,
+,,7367c7046724b72ddd8660bb42fe7b5e,betfair_ex_uk,Sporting Kansas City,Colorado Rapids,2024-09-19 00:30:00+00:00,2.22,soccer_usa_mls,H2hOutcome.H,10,1.95,None,,
