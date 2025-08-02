@@ -1,10 +1,18 @@
     name: Scheduled Hello World
 
     on:
-      schedule:
-        # Runs every 5 minutes
-        - cron: '*/5 * * * *' 
-
+        workflow_dispatch:
+                # Optional: Define inputs if the workflow requires user input
+                inputs:
+                  logLevel:
+                    description: 'Log level'
+                    required: true
+                    default: 'warning'
+                  tags:
+                    description: 'Reason for running workflow'
+                    required: true
+                    type: string
+                
     jobs:
       hello-world-job:
         runs-on: ubuntu-latest
