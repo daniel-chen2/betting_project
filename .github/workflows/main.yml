@@ -23,16 +23,16 @@
           - name: Checkout repository
             uses: actions/checkout@v4 # Action to check out your code
 
-          - name: Set up Python
-            uses: actions/setup-python@v5 # Action to set up a specific Python version
-            with:
-              python-version: '3.13.5' # Specify the desired Python version
-
           - name: UTF-8
             run: set PYTHONIOENCODING=UTF-8
 
           - name: UTF-8 interpreter
             run: set PYTHONUTF8=1
+
+          - name: Set up Python
+            uses: actions/setup-python@v5 # Action to set up a specific Python version
+            with:
+              python-version: '3.13.5' # Specify the desired Python version
 
           - name: Install dependencies (optional)
             run: pip install -r requirements.txt # Install packages from requirements.txt
