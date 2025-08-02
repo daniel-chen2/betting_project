@@ -1,4 +1,4 @@
-    name: Scheduled Hello World
+    name: Bet Searcher
 
     on:
         workflow_dispatch:
@@ -14,8 +14,20 @@
                     type: string
                 
     jobs:
-      hello-world-job:
-        runs-on: ubuntu-latest
+      build:
+        runs-on: ubuntu-latest # Use a GitHub-hosted Ubuntu runner
+
         steps:
-          - name: Say Hello
-            run: echo "Hello, World! This is a scheduled GitHub Action."
+          - name: Checkout repository
+            uses: actions/checkout@v4 # Action to check out your code
+
+          - name: Set up Python
+            uses: actions/setup-python@v5 # Action to set up a specific Python version
+            with:
+              python-version: '3.9' # Specify the desired Python version
+
+          - name: Install dependencies (optional)
+            run: pip install -r requirements.txt # Install packages from requirements.txt
+
+          - name: Run Python script
+            run: python script.py # Execute your Python script
