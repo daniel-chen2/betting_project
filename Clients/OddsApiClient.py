@@ -1,6 +1,8 @@
 import requests
 from enum import Enum
 import deserialize
+from requests.adapters import HTTPAdapter
+from urllib3.util import Retry
 import Clients.OddsApiModel as oddsModel
 
 API_KEY = '157d6795bd369c260d82ddb6064eb13f'
@@ -98,9 +100,25 @@ def getEventsForMultipleSports(sports, regions: list[Regions], markets: list[Mar
 
 
 def __getEventsForSingleSport(sport, regions, markets, commenceTimeTo, commenceTimeFrom):
+    # define the retry strategy
+    retry_strategy = Retry(
+        total=4,  # maximum number of retries
+        backoff_factor=2,
+        status_forcelist=[
+            429,
+            500,
+            502,
+            503,
+            504,
+        ],  # the HTTP status codes to retry on
+    )
+
+    # create an HTTP adapter with the retry strategy and mount it to the session
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+
+    
+
     odds_json = []
-
-
     params={
         "api_key": API_KEY,
         "regions": regions,
