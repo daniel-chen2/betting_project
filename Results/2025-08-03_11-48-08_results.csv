@@ -1,0 +1,4 @@
+id,bookmaker,home_team,away_team,commence_time,odds,sport_key,guessed_outcome,betAmount,kellyBetRatio,halfKellyBetRatio,bookmaker_average_odds,number_of_bookmakers,outcome,alpha
+1503a14687332f7710c5eabbe3d814c0,betfair_ex_uk,BK Hacken,IF Elfsborg,2025-08-03 12:00:00+00:00,2.22,soccer_sweden_allsvenskan,H2hOutcome.A,10,0.09016393442622958,0.04508196721311479,2.0,17,,0.0495495495495496
+81a825e53632b1e5103a85c2a5d44458,betfair_ex_uk,SJK Seinäjoki,FC KTP,2025-08-03 13:00:00+00:00,1.59,soccer_finland_veikkausliiga,H2hOutcome.H,10,0.1636469900642901,0.08182349503214505,1.45,16,,0.060724354803730285
+4c6eb2619f607988ef75db6525de321a,betfair_ex_uk,FC Viktoria Köln 1904,Schweinfurt,2025-08-03 14:30:00+00:00,1.97,soccer_germany_liga3,H2hOutcome.H,10,0.09736540664375716,0.04868270332187858,1.7999999999999998,5,,0.04794134235758607

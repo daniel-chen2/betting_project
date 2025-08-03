@@ -14,7 +14,7 @@ import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
 current_utc_time = datetime.now(timezone.utc)
-future_time = current_utc_time + timedelta(hours=12)
+future_time = current_utc_time + timedelta(hours=5)
 iso_formatted_time_with_z = future_time.isoformat(timespec="seconds").replace(
     "+00:00", "Z"
 )
@@ -32,11 +32,11 @@ soccer_events = oddsApi.getEventsForMultipleSports(
 )
 
 bettingEngine = BettingEngine.H2hEventAboveMeanOddsBettingEngine(
-    alpha=0.04,
-    betOddsUpperLimit=2.5,
+    alpha=0.035,
+    betOddsUpperLimit=2.25,
     betAmount=10,
-    commision=0.0,
-    singleBookmaker="betfair",
+    commision=0.06,
+    singleBookmaker="betfair_ex_uk",
 )
 
 current_utc_time = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%M-%S")

@@ -1,0 +1,2 @@
+id,bookmaker,home_team,away_team,commence_time,odds,sport_key,guessed_outcome,betAmount,kellyBetRatio,halfKellyBetRatio,bookmaker_average_odds,number_of_bookmakers,outcome,alpha
+81a825e53632b1e5103a85c2a5d44458,betfair_ex_uk,SJK Seinäjoki,FC KTP,2025-08-03 13:00:00+00:00,1.59,soccer_finland_veikkausliiga,H2hOutcome.H,10,0.1636469900642901,0.08182349503214505,1.45,16,,0.060724354803730285

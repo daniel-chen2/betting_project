@@ -19,7 +19,10 @@ class H2hBet:
     sport_key: str
     guessed_outcome: H2hOutcome
     betAmount: float
+    kellyBetRatio: float
+    halfKellyBetRatio: float
     bookmaker_average_odds: float
+    number_of_bookmakers: float
     outcome: Optional[H2hOutcome]
     alpha: Optional[float]
 

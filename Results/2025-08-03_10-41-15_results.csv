@@ -1,0 +1,4 @@
+id,bookmaker,home_team,away_team,commence_time,odds,sport_key,guessed_outcome,betAmount,kellyBetRatio,halfKellyBetRatio,bookmaker_average_odds,number_of_bookmakers,outcome,alpha
+41e5e4afb8cf7907279a33671e8152eb,betfair_ex_uk,Erzgebirge Aue,Hansa Rostock,2025-08-03 11:30:00+00:00,2.34,soccer_germany_liga3,H2hOutcome.A,10,0.0852878464818762,0.0426439232409381,2.1,15,,0.04884004884004878
+f1a3c7c83a16ddc9c930605626d5d06f,betfair_ex_uk,Beijing FC,Tianjin Jinmen Tiger FC,2025-08-03 11:35:00+00:00,1.53,soccer_china_superleague,H2hOutcome.H,10,0.16057808109193106,0.08028904054596553,1.41,13,,0.05562508691419832
+4c6eb2619f607988ef75db6525de321a,betfair_ex_uk,FC Viktoria Köln 1904,Schweinfurt,2025-08-03 14:30:00+00:00,1.98,soccer_germany_liga3,H2hOutcome.H,10,0.10204081632653071,0.051020408163265356,1.7999999999999998,5,,0.0505050505050505

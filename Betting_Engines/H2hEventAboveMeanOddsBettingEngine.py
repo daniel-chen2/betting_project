@@ -33,7 +33,7 @@ class H2hEventAboveMeanOddsBettingEngine:
                 continue
             probabilityMedian = 1/bookmakers_df[f"{outcome}_back_odds"].median(numeric_only=True)
             if(self.__willBet(bookmaker[f"{outcome}_back_odds"], probabilityMedian, self.alpha, self.commision, self.betOddsUpperLimit)):
-                worthyBets.append({"bookmaker": bookmaker["title"], "guessed_outcome": H2hOutcome(outcome), "odds": bookmaker[f"{outcome}_back_odds"], "median": 1/probabilityMedian})
+                worthyBets.append({"bookmaker": bookmaker["title"], "guessed_outcome": H2hOutcome(outcome), "odds": bookmaker[f"{outcome}_back_odds"], "median": 1/probabilityMedian, "number_of_bookmakers": len(bookmakers_df)})
                 # Remove later just to test
                 break
                     
@@ -53,7 +53,7 @@ class H2hEventAboveMeanOddsBettingEngine:
             for betFound in worthyBetsFound:
                 b = (betFound["odds"] - 1)
                 p = (1/betFound["median"])
-                kellyBetAmount = ((b * p) - (1-p))/b * self.betAmount
+                kellyBetRatio = ((b * p) - (1-p))/b 
                 betsFound.append(
                     H2hBet(
                         id= event.id,
@@ -63,10 +63,13 @@ class H2hEventAboveMeanOddsBettingEngine:
                         commence_time=event.commence_time,
                         bookmaker=betFound["bookmaker"],
                         betAmount=self.betAmount,
+                        kellyBetRatio=kellyBetRatio,
+                        halfKellyBetRatio=kellyBetRatio/2,
+                        bookmaker_average_odds=betFound["median"],
                         guessed_outcome=betFound["guessed_outcome"],
                         odds=betFound["odds"],
+                        number_of_bookmakers=betFound["number_of_bookmakers"],
                         outcome=event.outcome,
-                        bookmaker_average_odds=betFound["median"],
                         alpha=1/betFound["median"] - 1/betFound["odds"]
                     )
                 )
