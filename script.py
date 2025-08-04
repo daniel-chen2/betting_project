@@ -23,13 +23,17 @@ current_formatted_time = current_utc_time.isoformat(timespec="seconds").replace(
 )
 
 sports = oddsApi.ALL_SOCCER_SPORTS + oddsApi.All_OTHER_SPORTS
-soccer_events = oddsApi.getEventsForMultipleSports(
+all_events = oddsApi.getEventsForMultipleSports(
     sports=sports,
     regions=[oddsApi.Regions.UK],
     markets=[oddsApi.Markets.H2H],
     commenceTimeTo=iso_formatted_time_with_z,
     commenceTimeFrom=current_formatted_time,
 )
+
+if len(all_events) == 0:
+    print("No events found... exiting")
+    sys.exit()
 
 bettingEngine = BettingEngine.H2hEventAboveMeanOddsBettingEngine(
     alpha=0.035,
@@ -41,7 +45,7 @@ bettingEngine = BettingEngine.H2hEventAboveMeanOddsBettingEngine(
 
 current_utc_time = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%M-%S")
 
-result_df = pd.DataFrame(bettingEngine.analyseAndFindBets(oddsApiEventsToH2hEvent(soccer_events)))
+result_df = pd.DataFrame(bettingEngine.analyseAndFindBets(oddsApiEventsToH2hEvent(all_events)))
 csv_url = f'Results/{current_utc_time}_results.csv'
 result_df.to_csv(csv_url, index=False) 
 
