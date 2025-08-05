@@ -1,0 +1,2 @@
+id,bookmaker,home_team,away_team,commence_time,odds,sport_key,guessed_outcome,betAmount,kellyBetRatio,halfKellyBetRatio,bookmaker_average_odds,number_of_bookmakers,outcome,alpha
+4c6eb2619f607988ef75db6525de321a,betfair_ex_uk,FC Viktoria Köln 1904,Schweinfurt,2025-08-03 14:30:00+00:00,1.94,soccer_germany_liga3,H2hOutcome.H,10,0.08274231678487004,0.04137115839243502,1.7999999999999998,5,,0.04009163802978233

@@ -16,6 +16,7 @@ class H2hBet:
     away_team: str
     commence_time: datetime
     odds: float
+    odds_with_commision: float
     sport_key: str
     guessed_outcome: H2hOutcome
     betAmount: float

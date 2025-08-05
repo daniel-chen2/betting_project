@@ -1,0 +1,2 @@
+id,bookmaker,home_team,away_team,commence_time,odds,odds_with_commision,sport_key,guessed_outcome,betAmount,kellyBetRatio,halfKellyBetRatio,bookmaker_average_odds,number_of_bookmakers,outcome,alpha
+c8a364012cd5df6bd400a6ca649fe26b,betfair_ex_uk,Inter Miami CF,Pumas,2025-08-06 23:30:00+00:00,2.04,2.04,soccer_concacaf_leagues_cup,H2hOutcome.H,10,0.03782274247491634,0.01891137123745817,1.9627922853729307,12,,0.01928218243819263

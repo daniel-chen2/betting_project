@@ -3,6 +3,8 @@ import sys
 from Models.H2hEvent import H2hEvent, H2hBet, H2hOutcome
 import pandas as pd
 
+INTERCEPTS = {"home_team": 0.034, "away_team": 0.057, "draw": 0.037 }
+
 @dataclass
 class H2hEventAboveMeanOddsBettingEngine:
     alpha: float 
@@ -18,22 +20,28 @@ class H2hEventAboveMeanOddsBettingEngine:
         worthyBets = []
         # for index, bookmaker in bookmakers_df.iterrows():
         for outcome in ["home_team", "away_team", "draw"]:
+            bookmakers_df[f"{outcome}_back_odds_with_commision"] = bookmakers_df[f"{outcome}_back_odds"].transform(lambda odd: (1-self.commision) * odd + self.commision)
+
             # Janky - Comment out highest bookmaker
             # highest_bookmaker_index = bookmakers_df[f"{outcome}_back_odds"].idxmax() 
             # if(pd.isna(highest_bookmaker_index)):
             #     continue
             # bookmaker = bookmakers_df.loc[bookmakers_df[f"{outcome}_back_odds"].idxmax()] 
+            # Comment to here
 
+            # Comment to here
             bookmaker_query = bookmakers_df.query(f"title.str.contains('{self.singleBookmaker}')", engine="python")
             if(len(bookmaker_query) == 0 ):
                 continue
             bookmaker = bookmaker_query.iloc[0]
+            # comment to here
 
             if(bookmaker[f"{outcome}_back_odds"] is None or pd.isna(bookmaker[f"{outcome}_back_odds"])):
                 continue
-            probabilityMedian = 1/bookmakers_df[f"{outcome}_back_odds"].median(numeric_only=True)
+            # Add commision column
+            probabilityMedian = 1/bookmakers_df[f"{outcome}_back_odds"].median(numeric_only=True) - INTERCEPTS[outcome]
             if(self.__willBet(bookmaker[f"{outcome}_back_odds"], probabilityMedian, self.alpha, self.commision, self.betOddsUpperLimit)):
-                worthyBets.append({"bookmaker": bookmaker["title"], "guessed_outcome": H2hOutcome(outcome), "odds": bookmaker[f"{outcome}_back_odds"], "median": 1/probabilityMedian, "number_of_bookmakers": len(bookmakers_df)})
+                worthyBets.append({"bookmaker": bookmaker["title"], "guessed_outcome": H2hOutcome(outcome), "odds": bookmaker[f"{outcome}_back_odds"], "median": 1/probabilityMedian, "number_of_bookmakers": len(bookmakers_df), "odds_with_commision": bookmaker[f"{outcome}_back_odds_with_commision"]})
                 # Remove later just to test
                 break
                     
@@ -51,7 +59,7 @@ class H2hEventAboveMeanOddsBettingEngine:
                 continue
 
             for betFound in worthyBetsFound:
-                b = (betFound["odds"] - 1)
+                b = (betFound["odds_with_commision"] - 1)
                 p = (1/betFound["median"])
                 kellyBetRatio = ((b * p) - (1-p))/b 
                 betsFound.append(
@@ -68,9 +76,10 @@ class H2hEventAboveMeanOddsBettingEngine:
                         bookmaker_average_odds=betFound["median"],
                         guessed_outcome=betFound["guessed_outcome"],
                         odds=betFound["odds"],
+                        odds_with_commision=betFound["odds_with_commision"],
                         number_of_bookmakers=betFound["number_of_bookmakers"],
                         outcome=event.outcome,
-                        alpha=1/betFound["median"] - 1/betFound["odds"]
+                        alpha=1/betFound["median"] - 1/betFound["odds_with_commision"]
                     )
                 )
         return betsFound
