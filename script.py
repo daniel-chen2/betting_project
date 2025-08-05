@@ -23,7 +23,7 @@ current_formatted_time = current_utc_time.isoformat(timespec="seconds").replace(
 )
 
 all_events = oddsApi.getEventsForMultipleSports(
-    sports=[sport for sport in oddsApi.ALL_SPORTS if "soccer" in sport],
+    sports= oddsApi.ALL_SPORTS,
     regions=[oddsApi.Regions.UK],
     markets=[oddsApi.Markets.H2H],
     commenceTimeTo=iso_formatted_time_with_z,
