@@ -35,7 +35,7 @@ if len(all_events) == 0:
     sys.exit()
 
 bettingEngine = BettingEngine.H2hEventAboveMeanOddsBettingEngine(
-    alpha=0.035,
+    alpha=0.015,
     # betOddsUpperLimit=2.25,
     betAmount=10,
     commision=0.06,
