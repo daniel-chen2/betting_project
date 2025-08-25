@@ -2,8 +2,9 @@ import json
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
+import os
 
-webhook_url = "https://discord.com/api/webhooks/1401048584912244796/94YuNQ44rXP3dMK15ccwLQ-nsZE3oqwelDxtFJHJlyyPZeofkSWiAP6t-xc1Z2uiSYN2"  # Replace with your actual webhook URL
+webhook_url = os.environ.get("DISCORD_WEBHOOK")
 
 def send_message(message:str, csv_file_path):
     message_content = {"content": message}

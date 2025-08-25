@@ -4,21 +4,19 @@ import deserialize
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
 import Clients.OddsApiModel as oddsModel
+import os
 
-API_KEY = "157d6795bd369c260d82ddb6064eb13f"
+API_KEY = os.environ.get("ODDS_API_KEY")
 
 ODDS_API_URL = "https://api.the-odds-api.com/v4"
-
 
 class Regions(Enum):
     AU = "au"
     UK = "uk"
     US = "us"
 
-
 class Markets(Enum):
     H2H = "h2h"
-
 
 ODDS_FORMAT = "decimal"  # decimal | american
 
