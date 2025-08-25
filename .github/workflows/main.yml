@@ -39,3 +39,8 @@
 
           - name: Run Python script
             run: python script.py # Execute your Python script
+            env:
+              ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+              DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+
+    
